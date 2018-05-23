@@ -2263,6 +2263,45 @@ pre .javascript .function {
   font-size: 0.6em;
   text-shadow: 0 1px #fff;
 }
+.about-title {
+  font-size: 28px !important;
+  font-weight: bold;
+}
+.about-welcome {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+.about-desc {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+.about-desc-trans {
+  font-size: 18px;
+  margin-top: 15px;
+}
+.about-image {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.about-avatar {
+  height: 150px;
+  width: 150px;
+  border-radius: 150px;
+}
+.author-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+.about-content {
+  font-size: 16px;
+  letter-spacing: 2px;
+}
 @media screen and (min-width: 980px) {
   #sidebar {
     display: inline;
