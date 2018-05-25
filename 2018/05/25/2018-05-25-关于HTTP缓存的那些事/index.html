@@ -15,7 +15,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/http/http-cache-1.png">
 <meta property="og:image" content="http://yoursite.com/images/http/http-cache-2.png">
-<meta property="og:updated_time" content="2018-05-25T13:04:22.146Z">
+<meta property="og:updated_time" content="2018-05-25T13:11:12.635Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于HTTP缓存的那些事">
 <meta name="twitter:description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
@@ -79,7 +79,7 @@
         <section id="main"><article id="post-2018-05-25-关于HTTP缓存的那些事" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" class="article-date">
-  <time class="post-time" datetime="2018-05-25T13:00:00.000Z" itemprop="datePublished">
+  <time class="post-time" datetime="2018-05-25T13:06:18.000Z" itemprop="datePublished">
     <span class="post-month">5月</span><br/>
     <span class="post-day">25</span>
   </time>
@@ -124,7 +124,7 @@
 <h2 id="缓存的过程"><a href="#缓存的过程" class="headerlink" title="缓存的过程"></a>缓存的过程</h2><p><img src="/images/http/http-cache-1.png" alt="第一次发起请求"></p>
 <p>浏览器第一次发起请求时，本地无缓存，向web服务器发送请求，服务器端响应请求，会将页面最后修改时间通过<code>Last-Modified</code>标识发送给客户端，同时还会生成一个Etag发送给客户端，浏览器端缓存。</p>
 <p><img src="/images/http/http-cache-2.png" alt="再次发起请求"></p>
-<p>浏览器再次发起请求时，解析请求报文，查找本地是否有缓存，如果没有，则从服务器端获取；如果有，根据header中的Cache-Control和Expires来判断是否过期。如果没有过期，则直接从缓存中获取资源信息，此次请求不会与服务器端进行通信。如果过期了，需要与服务器进行再验证，客户端会通过If-None-Match头将先前服务器发送过来的Etag发送给服务器，服务器会对比这个客户端发过来的Etag是否与服务器的相同，如果相同，就将If-None-Match的值设为false，返回304，客户端继续使用本地缓存，不解析服务器端发回来的数据，如果不相同就将If-None-Match的值设为true，返回200，客户端重新解析服务器端返回的数据。客户端还会通过If-Modified-Since头将先前服务器端发过来的最后修改时间戳发送给服务器，服务器端通过这个时间戳判断客户端的页面是否是最新的，如果不是最新的，则返回最新的内容，如果是最新的，则返回304，客户端继续使用本地缓存。</p>
+<p>浏览器再次发起请求时，解析请求报文，查找本地是否有缓存，如果没有，则从服务器端获取；如果有，根据header中的<code>Cache-Control</code>和<code>Expires</code>来判断是否过期。<br>如果没有过期，则直接从缓存中获取资源信息，此次请求不会与服务器端进行通信。<br>如果过期了，需要与服务器进行再验证，客户端会通过<code>If-None-Match</code>头将先前服务器发送过来的<code>Etag</code>发送给服务器，服务器会对比这个客户端发过来的<code>Etag</code>是否与服务器的相同，如果相同，就将<code>If-None-Match</code>的值设为false，返回304，客户端继续使用本地缓存，不解析服务器端发回来的数据，如果不相同就将<code>If-None-Match</code>的值设为true，返回200，客户端重新解析服务器端返回的数据。客户端还会通过<code>If-Modified-Since</code>头将先前服务器端发过来的最后修改时间戳发送给服务器，服务器端通过这个时间戳判断客户端的页面是否是最新的，如果不是最新的，则返回最新的内容，如果是最新的，则返回304，客户端继续使用本地缓存。</p>
 <h4 id="浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。"><a href="#浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。" class="headerlink" title="浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。"></a>浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。</h4><p><strong>强缓存</strong>是利用<code>Expires</code>和<code>Cache-Control</code>两个字段来控制的。</p>
 <ul>
 <li><code>Cache-Control:max-age</code>：定义了文档的最大使用期。</li>
@@ -136,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" data-id="cjhlzcb0b0000y8u4p7t62iid" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" data-id="cjhlzjpiw0002rgu4jbyf6zt3" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
