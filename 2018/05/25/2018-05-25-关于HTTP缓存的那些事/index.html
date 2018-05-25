@@ -3,15 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lollipop的杂货铺</title>
+  <title>关于HTTP缓存的那些事 | lollipop的杂货铺</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lollipop的杂货铺">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于HTTP缓存的那些事">
+<meta property="og:url" content="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/index.html">
 <meta property="og:site_name" content="lollipop的杂货铺">
+<meta property="og:description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/http/http-cache-1.png">
+<meta property="og:image" content="http://yoursite.com/images/http/http-cache-2.png">
+<meta property="og:updated_time" content="2018-05-25T13:04:22.146Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lollipop的杂货铺">
+<meta name="twitter:title" content="关于HTTP缓存的那些事">
+<meta name="twitter:description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
+<meta name="twitter:image" content="http://yoursite.com/images/http/http-cache-1.png">
   
     <link rel="alternate" href="/atom.xml" title="lollipop的杂货铺" type="application/atom+xml">
   
@@ -68,9 +76,7 @@
   </div>
 </div>
 
-        <section id="main">
-  
-    <article id="post-2018-05-25-关于HTTP缓存的那些事" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-2018-05-25-关于HTTP缓存的那些事" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" class="article-date">
   <time class="post-time" datetime="2018-05-25T13:00:00.000Z" itemprop="datePublished">
@@ -86,8 +92,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/">关于HTTP缓存的那些事</a>
+    <h1 class="article-title" itemprop="name">
+      关于HTTP缓存的那些事
     </h1>
   
 
@@ -106,12 +112,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^<br>
-        
-          <p class="article-more-link">
-            <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/#more">Read More</a>
-          </p>
-        
+        <p>关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^<br><a id="more"></a></p>
+<p>Web缓存是可以自动保存常见文档副本的HTTP设备。当Web请求抵达缓存时，如果本地有“已缓存的”副本，就可以从本地存储设备而不是原始服务器中提取这个文档。</p>
+<p>使用缓存的优点如下：</p>
+<ul>
+<li>减少了冗余的的数据传输；</li>
+<li>缓解了网络瓶颈的问题，不需要更多的带宽就能够更快地加载页面；</li>
+<li>降低了对原始服务器的要求，服务器可以更快地响应，避免过载的出现；</li>
+<li>降低了距离时延。</li>
+</ul>
+<h2 id="缓存的过程"><a href="#缓存的过程" class="headerlink" title="缓存的过程"></a>缓存的过程</h2><p><img src="/images/http/http-cache-1.png" alt="第一次发起请求"></p>
+<p>浏览器第一次发起请求时，本地无缓存，向web服务器发送请求，服务器端响应请求，会将页面最后修改时间通过<code>Last-Modified</code>标识发送给客户端，同时还会生成一个Etag发送给客户端，浏览器端缓存。</p>
+<p><img src="/images/http/http-cache-2.png" alt="再次发起请求"></p>
+<p>浏览器再次发起请求时，解析请求报文，查找本地是否有缓存，如果没有，则从服务器端获取；如果有，根据header中的Cache-Control和Expires来判断是否过期。如果没有过期，则直接从缓存中获取资源信息，此次请求不会与服务器端进行通信。如果过期了，需要与服务器进行再验证，客户端会通过If-None-Match头将先前服务器发送过来的Etag发送给服务器，服务器会对比这个客户端发过来的Etag是否与服务器的相同，如果相同，就将If-None-Match的值设为false，返回304，客户端继续使用本地缓存，不解析服务器端发回来的数据，如果不相同就将If-None-Match的值设为true，返回200，客户端重新解析服务器端返回的数据。客户端还会通过If-Modified-Since头将先前服务器端发过来的最后修改时间戳发送给服务器，服务器端通过这个时间戳判断客户端的页面是否是最新的，如果不是最新的，则返回最新的内容，如果是最新的，则返回304，客户端继续使用本地缓存。</p>
+<h4 id="浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。"><a href="#浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。" class="headerlink" title="浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。"></a>浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。</h4><p><strong>强缓存</strong>是利用<code>Expires</code>和<code>Cache-Control</code>两个字段来控制的。</p>
+<ul>
+<li><code>Cache-Control:max-age</code>：定义了文档的最大使用期。</li>
+<li><code>Expires</code>：指定了一个绝对的过期日期。</li>
+</ul>
+<p>如果同时出现<code>Cache-Control:max-age</code>和<code>Expires</code>，那么<code>max-age</code>优先级更高。</p>
+<p><strong>协商缓存</strong>是由服务器来确定缓存资源是否可用，这个主要涉及两组header字段：<code>Etag</code>和<code>If-None-Match</code>、<code>Last-Modified</code>和<code>If-Modified-Since</code>。</p>
+
       
     </div>
     <footer class="article-footer">
@@ -123,71 +144,21 @@
     </footer>
   </div>
   
-</article>
-
-
-
-
-  
-    <article id="post-2018-05-23-hexo+github搭建个人博客" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/" class="article-date">
-  <time class="post-time" datetime="2018-05-23T09:30:01.000Z" itemprop="datePublished">
-    <span class="post-month">5月</span><br/>
-    <span class="post-day">23</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/">hexo+github搭建个人博客</a>
-    </h1>
   
+    <a href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">hexo+github搭建个人博客</div>
+    </a>
+  
+</nav>
 
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一直想搭建自己的博客，但碍于自己的技术有限，HTML、服务器部署、域名解析等等一大堆东西需要折腾。而Hexo是时下比较流行的博客框架，有比较丰富的主题和插件支持，Github为用户提供了GitHub Pages，空间免费稳定，用来搭建一个博客是非常合适的。<br>
-        
-          <p class="article-more-link">
-            <a href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/23/2018-05-23-hexo+github搭建个人博客/" data-id="cjhlzcb1n0002y8u4v9utin14" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-
-
-  
 
 </section>
         
