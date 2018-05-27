@@ -3,15 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>lollipop的杂货铺</title>
+  <title>Angular的数据双向绑定原理 | lollipop的杂货铺</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="lollipop的杂货铺">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="之前的项目中用过Angular搭建页面，里面涉及到了一些表单，当用户填写表单时，View的状态就更新了，如果此时Angular框架可以自动更新Model的状态，就相当于我们把Model和View做了双向绑定。接下来让我们来捋一捋数据的双向绑定是怎么实现的。">
+<meta name="keywords" content="Angular 数据双向绑定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular的数据双向绑定原理">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/2018-05-27-Angualr的数据双向绑定原理/index.html">
 <meta property="og:site_name" content="lollipop的杂货铺">
+<meta property="og:description" content="之前的项目中用过Angular搭建页面，里面涉及到了一些表单，当用户填写表单时，View的状态就更新了，如果此时Angular框架可以自动更新Model的状态，就相当于我们把Model和View做了双向绑定。接下来让我们来捋一捋数据的双向绑定是怎么实现的。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-27T13:05:02.060Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="lollipop的杂货铺">
+<meta name="twitter:title" content="Angular的数据双向绑定原理">
+<meta name="twitter:description" content="之前的项目中用过Angular搭建页面，里面涉及到了一些表单，当用户填写表单时，View的状态就更新了，如果此时Angular框架可以自动更新Model的状态，就相当于我们把Model和View做了双向绑定。接下来让我们来捋一捋数据的双向绑定是怎么实现的。">
   
     <link rel="alternate" href="/atom.xml" title="lollipop的杂货铺" type="application/atom+xml">
   
@@ -68,9 +73,7 @@
   </div>
 </div>
 
-        <section id="main">
-  
-    <article id="post-2018-05-27-Angualr的数据双向绑定原理" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-2018-05-27-Angualr的数据双向绑定原理" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/27/2018-05-27-Angualr的数据双向绑定原理/" class="article-date">
   <time class="post-time" datetime="2018-05-27T13:05:16.000Z" itemprop="datePublished">
@@ -86,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/27/2018-05-27-Angualr的数据双向绑定原理/">Angular的数据双向绑定原理</a>
+    <h1 class="article-title" itemprop="name">
+      Angular的数据双向绑定原理
     </h1>
   
 
@@ -106,12 +109,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>之前的项目中用过Angular搭建页面，里面涉及到了一些表单，当用户填写表单时，View的状态就更新了，如果此时Angular框架可以自动更新Model的状态，就相当于我们把Model和View做了双向绑定。接下来让我们来捋一捋数据的双向绑定是怎么实现的。<br>
-        
-          <p class="article-more-link">
-            <a href="/2018/05/27/2018-05-27-Angualr的数据双向绑定原理/#more">Read More</a>
-          </p>
-        
+        <p>之前的项目中用过Angular搭建页面，里面涉及到了一些表单，当用户填写表单时，View的状态就更新了，如果此时Angular框架可以自动更新Model的状态，就相当于我们把Model和View做了双向绑定。接下来让我们来捋一捋数据的双向绑定是怎么实现的。<br><a id="more"></a></p>
+<p>数据的双向绑定一般应用于表单中，如果我们想要实现表单数据绑定，就需要引入<code>ngModel</code>指令，该指令用于基于domain模型，创建FormControl实例，并将创建的实例绑定到表单控件元素上。</p>
+<p>举个例子来看看ngModel指令如何实现数据的绑定，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;username&quot; [(ngModel)]=&quot;username&quot;&gt;</span><br><span class="line">&lt;p&gt;&#123;&#123;username&#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>实际上，<code>[(ngModel)]</code>是由属性绑定和事件绑定两部分构成的。<br>属性绑定<code>[ngModel]</code>实现了数据从组件类流向模板，只关心如何更新当前DOM元素；事件绑定<code>(ngModelChange)</code>实现了数据从模板流向组件类，通知外部世界DOM值改变。<br>它完整的写法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;username&quot; [ngModel]=&quot;username&quot; (ngModelChange)=&quot;username = $event&quot;&gt;</span><br><span class="line">&lt;p&gt;&#123;&#123;username&#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p><code>ngModel</code>作为<code>NgModel</code>指令的输入属性，用来设置元素的值；<code>ngModelChange</code>作<code>NgModel</code>指令的输出属性，用来监听元素值是否变化，并不会生成DOM事件，是一个EventEmitter类型的事件。</p>
+<p>当Angular解析一个<code>[(x)]</code>的绑定目标时，相当于为这个x指定绑定一个名为x的输入属性和一个名为xChange的输出属性。<br>通过输入属性存储数据，同时通过一个与之对应的输出属性（输入属性+Change后缀）监听输入属性的数据变化来触发相应的事件。</p>
+<p><code>[(ngModel)]</code>的具体实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Directive(&#123;</span><br><span class="line">    selector: &quot;[ngModel]&quot;,</span><br><span class="line">    host: &#123;</span><br><span class="line">        &quot;[value]&quot;: &quot;ngModel&quot;,</span><br><span class="line">        &quot;[input]&quot;: &quot;ngModelChange.next($event.target.value)&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">class NgModelDirective &#123;</span><br><span class="line">    @Input() ngModel: any;</span><br><span class="line">    @Output ngModelChange: EventEmitter = new EventEmitter();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
@@ -123,130 +131,21 @@
     </footer>
   </div>
   
-</article>
-
-
-
-
-  
-    <article id="post-2018-05-25-关于HTTP缓存的那些事" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" class="article-date">
-  <time class="post-time" datetime="2018-05-25T13:06:18.000Z" itemprop="datePublished">
-    <span class="post-month">5月</span><br/>
-    <span class="post-day">25</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/">关于HTTP缓存的那些事</a>
-    </h1>
   
+    <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">关于HTTP缓存的那些事</div>
+    </a>
+  
+</nav>
 
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^<br>
-        
-          <p class="article-more-link">
-            <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" data-id="cjhou7h250000lgu4dpfg5k6l" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
 
-
-
-  
-    <article id="post-2018-05-23-hexo+github搭建个人博客" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/" class="article-date">
-  <time class="post-time" datetime="2018-05-23T09:30:01.000Z" itemprop="datePublished">
-    <span class="post-month">5月</span><br/>
-    <span class="post-day">23</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/">hexo+github搭建个人博客</a>
-    </h1>
-  
-
-        <div>
-          
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/blog/">blog</a>
-  </div>
-
-          
-              
-
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一直想搭建自己的博客，但碍于自己的技术有限，HTML、服务器部署、域名解析等等一大堆东西需要折腾。而Hexo是时下比较流行的博客框架，有比较丰富的主题和插件支持，Github为用户提供了GitHub Pages，空间免费稳定，用来搭建一个博客是非常合适的。<br>
-        
-          <p class="article-more-link">
-            <a href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/23/2018-05-23-hexo+github搭建个人博客/" data-id="cjhou7h5w0002lgu4rfhqpg7l" class="article-share-link">分享</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
 
 </section>
         
