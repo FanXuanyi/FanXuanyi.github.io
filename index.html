@@ -106,41 +106,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>React生命周期（life cycle）可以分为挂载、渲染、卸载这几个阶段。<br>当渲染后的组件需要更新时，我们会重新去渲染组件，直至卸载。</p>
-<p>我们可以把React生命周期分成两类：</p>
-<ul>
-<li>当组件在挂载或卸载时；</li>
-<li>当组件接收新的数据时，即组件更新时。</li>
-</ul>
-<h4 id="1、组件的挂载"><a href="#1、组件的挂载" class="headerlink" title="1、组件的挂载"></a>1、组件的挂载</h4><p>四个生命周期方法：</p>
-<ul>
-<li>constructor</li>
-<li>componentWillMount：在render方法之前执行，代表渲染前的时刻。</li>
-<li>render</li>
-<li>componentDidMount：在render方法之后执行，代表渲染后的时刻。</li>
-</ul>
-<p>这个过程主要做组件状态的初始化。包括读取初始state和props以及两个组件生命周期方法，这些都只会在组件初始化时运行一次。</p>
-<h4 id="2、组件的卸载"><a href="#2、组件的卸载" class="headerlink" title="2、组件的卸载"></a>2、组件的卸载</h4><p>一个生命周期函数：</p>
-<ul>
-<li>componentWillUnmount：在该方法中执行一些清理方法，如事件回收或清除定时器。</li>
-</ul>
-<h4 id="3、数据更新过程"><a href="#3、数据更新过程" class="headerlink" title="3、数据更新过程"></a>3、数据更新过程</h4><p>1）组件自身的state更新</p>
-<p>四个生命周期函数：</p>
-<ul>
-<li>shouldComponentUpdate：接收需要更新的props和state，让开发者增加必要的条件判断，让其在需要使更新，不需要时不更新。当方法返回false时，组件不再执行生命周期方法。</li>
-<li>componentWillUpdate：更新渲染前的的时刻。不能在此方法中执行setState。</li>
-<li>render：渲染。</li>
-<li>componentDidUpdate：更新渲染后的时刻。</li>
-</ul>
-<p>2）组件是由父组件更新props而更新</p>
-<p>在shouldComponentUpdate之前先执行componentWillReceiveProps方法。此方法可以作为React在props传入后，渲染之前setState的机会。在此方法中调用setState是不会二次渲染的。</p>
-<p>下面我用一张图来对生命周期进行总结，如下图所示。</p>
-<p><img src="/images/react/react-life-cycle.png" alt="React生命周期"></p>
-
+        <p>React的核心概念那么多，生命周期就是其中之一。<br>
+        
+          <p class="article-more-link">
+            <a href="/2018/05/28/2018-05-28-React组件的生命周期/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/28/2018-05-28-React组件的生命周期/" data-id="cjhpjiayo0007t4u4fjjwzuuk" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/05/28/2018-05-28-React组件的生命周期/" data-id="cjhpjkcwz000840u4tg3cv2d5" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生命周期/">生命周期</a></li></ul>
@@ -199,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/27/2018-05-27-Angular的数据双向绑定原理/" data-id="cjhpjiaxt0002t4u4tcbs9nqu" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/05/27/2018-05-27-Angular的数据双向绑定原理/" data-id="cjhpjkcwf000640u49s5pp2k7" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Angular/">Angular</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据双向绑定/">数据双向绑定</a></li></ul>
@@ -258,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" data-id="cjhpjiayo0006t4u4rmvosm9s" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" data-id="cjhpjkctm000040u4lt5upkqy" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
@@ -317,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/23/2018-05-23-hexo+github搭建个人博客/" data-id="cjhpjiawy0000t4u488wg1788" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/05/23/2018-05-23-hexo+github搭建个人博客/" data-id="cjhpjkcv1000240u4dfx4291g" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
