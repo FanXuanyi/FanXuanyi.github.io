@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="lollipop的杂货铺">
 <meta property="og:description" content="说到面向对象，首先就会想到它的三个特性：封装、继承和多态。接下来，来看看JavaScript中是怎么实现继承的。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-05-30T13:42:18.244Z">
+<meta property="og:updated_time" content="2018-05-30T13:48:09.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript继承中的那些事">
 <meta name="twitter:description" content="说到面向对象，首先就会想到它的三个特性：封装、继承和多态。接下来，来看看JavaScript中是怎么实现继承的。">
@@ -76,7 +76,7 @@
         <section id="main"><article id="post-2018-05-30-JavaScript继承中的那些事" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/30/2018-05-30-JavaScript继承中的那些事/" class="article-date">
-  <time class="post-time" datetime="2018-05-30T13:45:12.000Z" itemprop="datePublished">
+  <time class="post-time" datetime="2018-05-30T13:43:59.000Z" itemprop="datePublished">
     <span class="post-month">5月</span><br/>
     <span class="post-day">30</span>
   </time>
@@ -110,7 +110,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>说到面向对象，首先就会想到它的三个特性：封装、继承和多态。接下来，来看看JavaScript中是怎么实现继承的。<br><a id="more"></a></p>
-<h4 id="1、原型链继承（类似继承）"><a href="#1、原型链继承（类似继承）" class="headerlink" title="1、原型链继承（类似继承）"></a>1、原型链继承（类似继承）</h4><p>类的原型对象的作用就是为类的原型添加共有方法，但类不能直接访问这些属性和方法，必须通过原型prototype来访问。<br>当我们实例化一个父类时，新创建的对象复制了父类的构造函数内的属性和方法并将原型<em>proto</em>指向了父类的原型对象，<br>这样就拥有了父类的原型对象上的属性和方法，并且这个新创建的对象可以直接访问父类原型对象上的属性与方法，同样也可以访问从父类构造函数中复制的属性和方法。<br>如果我们将这个新创建的对象赋值给子类的原型，那么这个子类的原型同样可以访问父类原型上的属性和方法与从父类构造函数中复制的属性和方法。</p>
+<h4 id="1、原型链继承（类似继承）"><a href="#1、原型链继承（类似继承）" class="headerlink" title="1、原型链继承（类似继承）"></a>1、原型链继承（类似继承）</h4><p>类的原型对象的作用就是为类的原型添加共有方法，但类不能直接访问这些属性和方法，必须通过原型prototype来访问。<br>当我们实例化一个父类时，新创建的对象复制了父类的构造函数内的属性和方法并将原型<em>proto</em>指向了父类的原型对象，这样就拥有了父类的原型对象上的属性和方法，并且这个新创建的对象可以直接访问父类原型对象上的属性与方法，同样也可以访问从父类构造函数中复制的属性和方法。<br>如果我们将这个新创建的对象赋值给子类的原型，那么这个子类的原型同样可以访问父类原型上的属性和方法与从父类构造函数中复制的属性和方法。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 声明父类</span><br><span class="line">function Animal () &#123;</span><br><span class="line">	this.name = name || &apos;Animal&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 为父类添加共有方法</span><br><span class="line">Animal.prototype.getName = function()&#123;</span><br><span class="line">	return this.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 声明子类</span><br><span class="line">function Dog () &#123;</span><br><span class="line">	this.dogName = &apos;dog&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 继承父类</span><br><span class="line">Dog.prototype = new Animal(); // 父类的实例赋值给子类的原型</span><br><span class="line">Dog.prototype.getDogName = function()&#123;</span><br><span class="line">	return this.dogName;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 创建一个子类的实例</span><br><span class="line">var d = new Dog();</span><br><span class="line">console.log(d.getName()); // &apos;Animal&apos;</span><br><span class="line">console.log(d.getDogName()); // &apos;dog&apos;</span><br></pre></td></tr></table></figure>
 <p>缺点：</p>
 <ul>
@@ -147,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/30/2018-05-30-JavaScript继承中的那些事/" data-id="cjht5vv2f0002mou41lkqlycm" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/05/30/2018-05-30-JavaScript继承中的那些事/" data-id="cjht62gro0002xou4kj5k2cx2" class="article-share-link">分享</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/继承/">继承</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
