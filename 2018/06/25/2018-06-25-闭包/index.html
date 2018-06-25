@@ -3,23 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于HTTP缓存的那些事 | lollipop的杂货铺</title>
+  <title>闭包 | lollipop的杂货铺</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
-<meta name="keywords" content="HTTP">
+  <meta name="description" content="闭包，是JavaScript中一个非常重要的概念。">
+<meta name="keywords" content="JavaScript,闭包,作用域">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于HTTP缓存的那些事">
-<meta property="og:url" content="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/index.html">
+<meta property="og:title" content="闭包">
+<meta property="og:url" content="http://yoursite.com/2018/06/25/2018-06-25-闭包/index.html">
 <meta property="og:site_name" content="lollipop的杂货铺">
-<meta property="og:description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
+<meta property="og:description" content="闭包，是JavaScript中一个非常重要的概念。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/http/http-cache-1.png">
-<meta property="og:image" content="http://yoursite.com/images/http/http-cache-2.png">
-<meta property="og:updated_time" content="2018-05-25T13:11:12.635Z">
+<meta property="og:updated_time" content="2018-06-25T13:55:43.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于HTTP缓存的那些事">
-<meta name="twitter:description" content="关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^">
-<meta name="twitter:image" content="http://yoursite.com/images/http/http-cache-1.png">
+<meta name="twitter:title" content="闭包">
+<meta name="twitter:description" content="闭包，是JavaScript中一个非常重要的概念。">
   
     <link rel="alternate" href="/atom.xml" title="lollipop的杂货铺" type="application/atom+xml">
   
@@ -76,11 +73,11 @@
   </div>
 </div>
 
-        <section id="main"><article id="post-2018-05-25-关于HTTP缓存的那些事" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-2018-06-25-闭包" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" class="article-date">
-  <time class="post-time" datetime="2018-05-25T13:06:18.000Z" itemprop="datePublished">
-    <span class="post-month">5月</span><br/>
+    <a href="/2018/06/25/2018-06-25-闭包/" class="article-date">
+  <time class="post-time" datetime="2018-06-25T13:56:12.000Z" itemprop="datePublished">
+    <span class="post-month">6月</span><br/>
     <span class="post-day">25</span>
   </time>
 </a>
@@ -93,14 +90,14 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于HTTP缓存的那些事
+      闭包
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/HTTP/">HTTP</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
   </div>
 
           
@@ -112,34 +109,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于HTTP缓存，之前都是半懂不懂的，现在重新看看写篇博客整理整理。^_^<br><a id="more"></a></p>
-<p>Web缓存是可以自动保存常见文档副本的HTTP设备。当Web请求抵达缓存时，如果本地有“已缓存的”副本，就可以从本地存储设备而不是原始服务器中提取这个文档。</p>
-<p>使用缓存的优点如下：</p>
+        <p>闭包，是JavaScript中一个非常重要的概念。<br><a id="more"></a></p>
+<p>在理解闭包之前，我们需要先知道几个重要的概念——作用域、作用域链和垃圾回收机制。</p>
+<h4 id="1、作用域、函数作用域、块作用域"><a href="#1、作用域、函数作用域、块作用域" class="headerlink" title="1、作用域、函数作用域、块作用域"></a>1、作用域、函数作用域、块作用域</h4><p>作用域，是一套规则，用于确定在何处以及如何查找变量，也就是说确定了变量、函数的使用范围。</p>
+<p>函数作用域是指，属于这个函数的全部变量都可以在整个函数的范围内使用及复用，外部作用域无法访问包装函数内部的任何内容。</p>
+<p>块作用域是指，变量和函数不仅可以属于所处的作用域，也可以属于整个代码块，通常指<code>{...}</code>内部。</p>
+<h4 id="2、作用域链"><a href="#2、作用域链" class="headerlink" title="2、作用域链"></a>2、作用域链</h4><p>当一个块或函数嵌套在另一个块或函数中时，就发生了作用域的嵌套。作用域链的用途是保证对执行环境有权访问的所有变量和函数的有序访问。可以将作用域链形象地比喻成一个按照出场顺序演出的名单，演出指的就是整个环境，名单上的人就是一个个对象，按照出演顺序依次表演，即为对变量的有序访问。<br>在当前作用域中无法找到某个变量时，就向上一级继续查找，直到找到该变量或抵达最外层作用域（全局作用域）为止。</p>
+<h4 id="3、垃圾回收"><a href="#3、垃圾回收" class="headerlink" title="3、垃圾回收"></a>3、垃圾回收</h4><p>简单说来就是，找出那些不再继续使用的变量，然后释放其占用的内存。</p>
+<p>在对这些概念有了理解之后，我们来看看什么是闭包。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>在《JavaScript高级程序设计》这一书中给的定义是：<strong>闭包是指有权访问另一个函数作用域中的变量的函数。</strong>简单的理解就是，定义在一个函数内部的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">    var a = 2;</span><br><span class="line">    function f2() &#123;</span><br><span class="line">        console.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">    return f2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var f = f1();</span><br><span class="line">f(); // 2 ——闭包！</span><br></pre></td></tr></table></figure>
+<p>在JS中，变量作用域属于函数作用域，当函数执行完，作用域就被被清理，内存随之被回收，而闭包是建立在一个函数内部的子函数，这便构成了作用域的嵌套，由于这个子函数（也就是闭包）可以访问向上一级访问，所以，即使上级函数执行完，作用域也不会立即销毁。</p>
+<p>正因为闭包可以访问上级作用域的特点，这便使得函数外部打破了“函数作用域”的束缚，可以访问函数内部的变量。<br>闭包可以实现模块，封装私有变量。<br>闭包会让这些变量的值始终保持在内存中。但是，这样会导致内存消耗大，所以在退出函数之前，将不使用的局部变量全部删除。</p>
+<p>闭包的应用场景：</p>
 <ul>
-<li>减少了冗余的的数据传输；</li>
-<li>缓解了网络瓶颈的问题，不需要更多的带宽就能够更快地加载页面；</li>
-<li>降低了对原始服务器的要求，服务器可以更快地响应，避免过载的出现；</li>
-<li>降低了距离时延。</li>
+<li>Ajax请求的成功回调</li>
+<li>事件绑定的回调方法</li>
+<li>setTimeout的延时回调</li>
+<li>一个函数内部返回另一个匿名函数</li>
 </ul>
-<h2 id="缓存的过程"><a href="#缓存的过程" class="headerlink" title="缓存的过程"></a>缓存的过程</h2><p><img src="/images/http/http-cache-1.png" alt="第一次发起请求"></p>
-<p>浏览器第一次发起请求时，本地无缓存，向web服务器发送请求，服务器端响应请求，会将页面最后修改时间通过<code>Last-Modified</code>标识发送给客户端，同时还会生成一个Etag发送给客户端，浏览器端缓存。</p>
-<p><img src="/images/http/http-cache-2.png" alt="再次发起请求"></p>
-<p>浏览器再次发起请求时，解析请求报文，查找本地是否有缓存，如果没有，则从服务器端获取；如果有，根据header中的<code>Cache-Control</code>和<code>Expires</code>来判断是否过期。<br>如果没有过期，则直接从缓存中获取资源信息，此次请求不会与服务器端进行通信。<br>如果过期了，需要与服务器进行再验证，客户端会通过<code>If-None-Match</code>头将先前服务器发送过来的<code>Etag</code>发送给服务器，服务器会对比这个客户端发过来的<code>Etag</code>是否与服务器的相同，如果相同，就将<code>If-None-Match</code>的值设为false，返回304，客户端继续使用本地缓存，不解析服务器端发回来的数据，如果不相同就将<code>If-None-Match</code>的值设为true，返回200，客户端重新解析服务器端返回的数据。客户端还会通过<code>If-Modified-Since</code>头将先前服务器端发过来的最后修改时间戳发送给服务器，服务器端通过这个时间戳判断客户端的页面是否是最新的，如果不是最新的，则返回最新的内容，如果是最新的，则返回304，客户端继续使用本地缓存。</p>
-<h4 id="浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。"><a href="#浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。" class="headerlink" title="浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。"></a>浏览器缓存主要分为强缓存（本地缓存）和协商缓存（弱缓存）。</h4><p><strong>强缓存</strong>是利用<code>Expires</code>和<code>Cache-Control</code>两个字段来控制的。</p>
-<ul>
-<li><code>Cache-Control:max-age</code>：定义了文档的最大使用期。</li>
-<li><code>Expires</code>：指定了一个绝对的过期日期。</li>
-</ul>
-<p>如果同时出现<code>Cache-Control:max-age</code>和<code>Expires</code>，那么<code>max-age</code>优先级更高。</p>
-<p><strong>协商缓存</strong>是由服务器来确定缓存资源是否可用，这个主要涉及两组header字段：<code>Etag</code>和<code>If-None-Match</code>、<code>Last-Modified</code>和<code>If-Modified-Since</code>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/2018-05-25-关于HTTP缓存的那些事/" data-id="cjiubrq0m0002y8u4a6dd5xdh" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/06/25/2018-06-25-闭包/" data-id="cjiubrq3a000dy8u4htsl9o4a" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/">HTTP</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/闭包/">闭包</a></li></ul>
 
     </footer>
   </div>
@@ -147,19 +143,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/05/27/2018-05-27-Angular的数据双向绑定原理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          Angular的数据双向绑定原理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/23/2018-05-23-hexo+github搭建个人博客/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/06/25/2018-06-25-JavaScript中的事件/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">hexo+github搭建个人博客</div>
+      <div class="article-nav-title">JavaScript中的事件</div>
     </a>
   
 </nav>
