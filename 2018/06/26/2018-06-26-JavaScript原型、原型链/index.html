@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>React组件的生命周期 | lollipop的杂货铺</title>
+  <title>JavaScript原型、原型链 | lollipop的杂货铺</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="React的核心概念那么多，生命周期就是其中之一。">
-<meta name="keywords" content="React,生命周期">
+  <meta name="description" content="原型、原型链是JS中十分重要的内容，在面试中也是面试官常常会问的问题。">
+<meta name="keywords" content="JavaScript,原型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React组件的生命周期">
-<meta property="og:url" content="http://yoursite.com/2018/05/28/2018-05-28-React组件的生命周期/index.html">
+<meta property="og:title" content="JavaScript原型、原型链">
+<meta property="og:url" content="http://yoursite.com/2018/06/26/2018-06-26-JavaScript原型、原型链/index.html">
 <meta property="og:site_name" content="lollipop的杂货铺">
-<meta property="og:description" content="React的核心概念那么多，生命周期就是其中之一。">
+<meta property="og:description" content="原型、原型链是JS中十分重要的内容，在面试中也是面试官常常会问的问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/react/react-life-cycle.png">
-<meta property="og:updated_time" content="2018-05-28T00:54:01.598Z">
+<meta property="og:image" content="http://yoursite.com/images/javascript/prototype/console.png">
+<meta property="og:image" content="http://yoursite.com/images/javascript/prototype/prototype_proto_.png">
+<meta property="og:updated_time" content="2018-06-26T01:13:34.733Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React组件的生命周期">
-<meta name="twitter:description" content="React的核心概念那么多，生命周期就是其中之一。">
-<meta name="twitter:image" content="http://yoursite.com/images/react/react-life-cycle.png">
+<meta name="twitter:title" content="JavaScript原型、原型链">
+<meta name="twitter:description" content="原型、原型链是JS中十分重要的内容，在面试中也是面试官常常会问的问题。">
+<meta name="twitter:image" content="http://yoursite.com/images/javascript/prototype/console.png">
   
     <link rel="alternate" href="/atom.xml" title="lollipop的杂货铺" type="application/atom+xml">
   
@@ -75,12 +76,12 @@
   </div>
 </div>
 
-        <section id="main"><article id="post-2018-05-28-React组件的生命周期" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-2018-06-26-JavaScript原型、原型链" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/28/2018-05-28-React组件的生命周期/" class="article-date">
-  <time class="post-time" datetime="2018-05-28T00:48:07.000Z" itemprop="datePublished">
-    <span class="post-month">5月</span><br/>
-    <span class="post-day">28</span>
+    <a href="/2018/06/26/2018-06-26-JavaScript原型、原型链/" class="article-date">
+  <time class="post-time" datetime="2018-06-26T01:13:40.000Z" itemprop="datePublished">
+    <span class="post-month">6月</span><br/>
+    <span class="post-day">26</span>
   </time>
 </a>
    
@@ -92,14 +93,14 @@
         
   
     <h1 class="article-title" itemprop="name">
-      React组件的生命周期
+      JavaScript原型、原型链
     </h1>
   
 
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/React/">React</a>
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
   </div>
 
           
@@ -111,45 +112,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>React的核心概念那么多，生命周期就是其中之一。<br><a id="more"></a></p>
-<p>React生命周期（life cycle）可以分为挂载、渲染、卸载这几个阶段。<br>当渲染后的组件需要更新时，我们会重新去渲染组件，直至卸载。</p>
-<p>我们可以把React生命周期分成两类：</p>
-<ul>
-<li>当组件在挂载或卸载时；</li>
-<li>当组件接收新的数据时，即组件更新时。</li>
+        <p>原型、原型链是JS中十分重要的内容，在面试中也是面试官常常会问的问题。<br><a id="more"></a></p>
+<h3 id="一、原型"><a href="#一、原型" class="headerlink" title="一、原型"></a>一、原型</h3><p>每一个函数都有一个prototype属性，这个属性是指向一个对象的引用，这个对象称为原型对象。原型对象包含函数实例共享的方法和属性，也就是说将函数用作构造函数调用（使用new操作符调用）的时候，新创建的对象会从原型对象上继承属性和方法。</p>
+<p>原型对象的用途是为每个实例对象存储共享的方法和属性，它仅仅是一个普通对象而已，并且所有的实例是共享同一个原型对象，因此有别于实例方法或属性，原型对象仅有一份。</p>
+<h3 id="二、原型链"><a href="#二、原型链" class="headerlink" title="二、原型链"></a>二、原型链</h3><p>在JavaScript中，用<em>proto</em>属性来表示一个对象的原型链。</p>
+<p>每一个对象都有一个隐藏的属性<em>proto</em>，这个属性引用创建了这个对象的函数prototype，即fn.<em>proto</em> === Fn.prototype，这里的<em>proto</em>称为隐式原型。<br>当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么它就会去<em>proto</em>里找这个属性，这<em>proto</em>又会有自己的<em>proto</em>，于是就这样一直找下去，也就是我们平时所说的原型链的概念。</p>
+<p>所有普通的原型链最终都会指向内置的Object.prototype。由于所有的“普通”（内置，不是特定主机的扩展）对象都“源于”（或者说把原型链的顶端设置为）这个Object.prototype对象，所以它包含JavaScript中许多通用的功能。</p>
+<p>下面的代码创建了一个构造函数Person，然后通过new关键字调用该构造函数得到一个实例对象p。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;&#125;</span><br><span class="line">var p = new Person();</span><br></pre></td></tr></table></figure>
+<p>在浏览器控制台中输出，各个对象之间的关系如下：</p>
+<p><img src="/images/javascript/prototype/console.png" alt="浏览器控制台中输出结果"></p>
+<p>下面用一张图来表示各个对象之间的关系。</p>
+<p><img src="/images/javascript/prototype/prototype_proto_.png" alt="各个对象之间的关系"></p>
+<p><em>【注】使用for..in遍历对象时原理和查找原型链类似，任何可以通过原型链访问到的属性都会被枚举，使用in操作符来检查属性在对象中是否存在时，同样会查找对象的整条原型链（无论属性是否可枚举）。</em></p>
+<h3 id="【小结】"><a href="#【小结】" class="headerlink" title="【小结】"></a>【小结】</h3><ul>
+<li>所有的引用类型（数组、对象、函数），都具有对象特性，即可自由扩展属性（除了null以外）。</li>
+<li>所有的引用类型（数组、对象、函数），都有一个<em>proto</em>属性（隐式原型属性），属性值是一个普通的对象。该属性对应该对象的原型。</li>
+<li>所有的函数对象，都有一个prototype属性（显式原型属性），属性值也是一个普通对策对象。该属性的值会被赋值给该函数创建的对象的<em>proto</em>属性。</li>
+<li>所有的引用类型（数组、对象、函数），<em>proto</em>属性值指向它的构造函数的”prototype”属性值。</li>
+<li>所有的原型对象都有constructor属性，该属性对应创建所有指向该原型的实例的构造函数。</li>
+<li>函数对象和原型对象通过prototype和constructor属性进行相互关联。</li>
+<li>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的<em>proto</em>（即它的构造函数的prototype）中寻找。</li>
 </ul>
-<h4 id="1、组件的挂载"><a href="#1、组件的挂载" class="headerlink" title="1、组件的挂载"></a>1、组件的挂载</h4><p>四个生命周期方法：</p>
-<ul>
-<li>constructor</li>
-<li>componentWillMount：在render方法之前执行，代表渲染前的时刻。</li>
-<li>render</li>
-<li>componentDidMount：在render方法之后执行，代表渲染后的时刻。</li>
-</ul>
-<p>这个过程主要做组件状态的初始化。包括读取初始state和props以及两个组件生命周期方法，这些都只会在组件初始化时运行一次。</p>
-<h4 id="2、组件的卸载"><a href="#2、组件的卸载" class="headerlink" title="2、组件的卸载"></a>2、组件的卸载</h4><p>一个生命周期函数：</p>
-<ul>
-<li>componentWillUnmount：在该方法中执行一些清理方法，如事件回收或清除定时器。</li>
-</ul>
-<h4 id="3、数据更新过程"><a href="#3、数据更新过程" class="headerlink" title="3、数据更新过程"></a>3、数据更新过程</h4><p>1）组件自身的state更新</p>
-<p>四个生命周期函数：</p>
-<ul>
-<li>shouldComponentUpdate：接收需要更新的props和state，让开发者增加必要的条件判断，让其在需要使更新，不需要时不更新。当方法返回false时，组件不再执行生命周期方法。</li>
-<li>componentWillUpdate：更新渲染前的的时刻。不能在此方法中执行setState。</li>
-<li>render：渲染。</li>
-<li>componentDidUpdate：更新渲染后的时刻。</li>
-</ul>
-<p>2）组件是由父组件更新props而更新</p>
-<p>在shouldComponentUpdate之前先执行componentWillReceiveProps方法。此方法可以作为React在props传入后，渲染之前setState的机会。在此方法中调用setState是不会二次渲染的。</p>
-<p>下面我用一张图来对生命周期进行总结，如下图所示。</p>
-<p><img src="/images/react/react-life-cycle.png" alt="React生命周期"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/28/2018-05-28-React组件的生命周期/" data-id="cjiuzzfdc0006acu4220n3b3z" class="article-share-link">分享</a>
+      <a data-url="http://yoursite.com/2018/06/26/2018-06-26-JavaScript原型、原型链/" data-id="cjiuzzfec000gacu4cjplgtnq" class="article-share-link">分享</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生命周期/">生命周期</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型/">原型</a></li></ul>
 
     </footer>
   </div>
@@ -157,19 +149,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/05/30/2018-05-30-JavaScript继承中的那些事/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">
-        
-          JavaScript继承中的那些事
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/05/27/2018-05-27-Angular的数据双向绑定原理/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/06/25/2018-06-25-闭包/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">Angular的数据双向绑定原理</div>
+      <div class="article-nav-title">闭包</div>
     </a>
   
 </nav>
