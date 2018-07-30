@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo+github搭建个人博客 | lollipop的杂货铺</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="找工作做各个公司的笔试题时,需要自己写输入输出,我到现在都记得第一次做笔试题不会写输入的难受心情。我一般都是用JS来刷题的，下面整理一下刷题时遇到的输入情况。">
+<meta name="keywords" content="node,readline">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo+github搭建个人博客">
+<meta property="og:url" content="http://yoursite.com/2018/07/30/2018-07-30-用Node.js实现输入输出/index.html">
+<meta property="og:site_name" content="lollipop的杂货铺">
+<meta property="og:description" content="找工作做各个公司的笔试题时,需要自己写输入输出,我到现在都记得第一次做笔试题不会写输入的难受心情。我一般都是用JS来刷题的，下面整理一下刷题时遇到的输入情况。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-30T14:36:43.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo+github搭建个人博客">
+<meta name="twitter:description" content="找工作做各个公司的笔试题时,需要自己写输入输出,我到现在都记得第一次做笔试题不会写输入的难受心情。我一般都是用JS来刷题的，下面整理一下刷题时遇到的输入情况。">
+  
+    <link rel="alternate" href="/atom.xml" title="lollipop的杂货铺" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/uploads/avatar.jpg">
+    <h2 class="author">lollipop94</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>10</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>6</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>18</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-2018-07-30-用Node.js实现输入输出" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/30/2018-07-30-用Node.js实现输入输出/" class="article-date">
+  <time class="post-time" datetime="2018-07-30T14:38:13.000Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">30</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hexo+github搭建个人博客
+    </h1>
+  
+
+        <div>
+          
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Node-js/">Node.js</a>
+  </div>
+
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>找工作做各个公司的笔试题时,需要自己写输入输出,我到现在都记得第一次做笔试题不会写输入的难受心情。我一般都是用JS来刷题的，下面整理一下刷题时遇到的输入情况。<br><a id="more"></a></p>
+<h4 id="输入单行的情况"><a href="#输入单行的情况" class="headerlink" title="输入单行的情况"></a>输入单行的情况</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 输入单行的情况</span><br><span class="line">var readline = require(&apos;readline&apos;); // 引入readline接口，读取输入行</span><br><span class="line">var rl = readline.createInterface(&#123; // 创建输入输出接口</span><br><span class="line">	input: process.stdin,</span><br><span class="line">	output: process.stdout</span><br><span class="line">&#125;);</span><br><span class="line">rl.on(&apos;line&apos;, function(line) &#123; // 监听控制台输入</span><br><span class="line">	var data = line.trim(); // 获取控制台输入</span><br><span class="line">	// 逻辑处理</span><br><span class="line">	// ......</span><br><span class="line">	console.log(data); // 输出结果</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="输入k行的情况"><a href="#输入k行的情况" class="headerlink" title="输入k行的情况"></a>输入k行的情况</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 输入k行的情况，比如k=2时</span><br><span class="line">var readline = require(&apos;readline&apos;);</span><br><span class="line">var rl = readline.createInterface(&#123;</span><br><span class="line">	input: process.stdin,</span><br><span class="line">	output: process.stdout</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var k = 2;</span><br><span class="line">var row = []; // 用于存储每行的输入</span><br><span class="line"></span><br><span class="line">rl.on(&apos;line&apos;, function(line) &#123;</span><br><span class="line">	row.push(line.trim());</span><br><span class="line">	if (row.length === 2) &#123; // 当输入的行数为k时，开始逻辑处理</span><br><span class="line">		// 逻辑处理</span><br><span class="line">		// ......</span><br><span class="line">		console.log(row);</span><br><span class="line">		row.length = 0; // 状态重置（如果没有这句代码，就只能实现输入一次的结果）</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="第一行输入一个数字N，接下来输入N行的情况"><a href="#第一行输入一个数字N，接下来输入N行的情况" class="headerlink" title="第一行输入一个数字N，接下来输入N行的情况"></a>第一行输入一个数字N，接下来输入N行的情况</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var readline = require(&apos;readline&apos;);</span><br><span class="line">var rl = readline.createInterface(&#123;</span><br><span class="line">	input: process.stdin,</span><br><span class="line">	output: process.stdout</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var row = []; // 用于存储每行的输入</span><br><span class="line"></span><br><span class="line">rl.on(&apos;line&apos;, function(line) &#123;</span><br><span class="line">	row.push(line.trim());</span><br><span class="line">	var N = parseInt(row[0]);</span><br><span class="line">	if (row.length === N + 1) &#123;</span><br><span class="line">		// 逻辑处理</span><br><span class="line">		// ......</span><br><span class="line">		console.log(row);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面这样书写只能实现输入一次的结果,下面的写法就可以实现多次输入的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var readline = require(&apos;readline&apos;);</span><br><span class="line">var rl = readline.createInterface(&#123;</span><br><span class="line">	input: process.stdin,</span><br><span class="line">	output: process.stdout</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">var k = 0; // 先给行数置0，表示还没开始读取</span><br><span class="line">var row = []; // 用来存储每行的输入</span><br><span class="line"></span><br><span class="line">rl.on(&apos;line&apos;, function(line) &#123;</span><br><span class="line">	if (k === 0) &#123;</span><br><span class="line">		k = parseInt(line.trim()); // 读取第一行，得到接下来的行数</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		row.push(line.trim()); // 将每行输入的数据存入row数组中</span><br><span class="line">		if (k === row.length) &#123; // 当输入的行数等于设定的k值时，开始逻辑处理</span><br><span class="line">			// 逻辑处理</span><br><span class="line">			// ......</span><br><span class="line">			console.log(row);</span><br><span class="line">			// 状态重置</span><br><span class="line">			row.length = 0;</span><br><span class="line">			k = 0;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/30/2018-07-30-用Node.js实现输入输出/" data-id="cjk8dqy2q000f58u483nwbjs2" class="article-share-link">分享</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/readline/">readline</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/24/2018-07-24-JavaScript中的深拷贝与浅拷贝/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">JavaScript中的深拷贝与浅拷贝</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">lollipop的杂货铺</h1>
+    <h2 class="blog-subtitle">Live well, love lots, and laugh.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+          <a href="/about" title="About">
+            <li>关于</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="/uploads/avatar.jpg">
+    <h2 class="author">lollipop94</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>10</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>6</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>18</strong><br>标签</div></a>
+    </div>
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/lollipop94" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://blog.csdn.net/lollipop94" target="_blank" title="CSDN">
+          CSDN
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 lollipop94<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/about" title="" class="menuItem">关于</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
